@@ -1,0 +1,70 @@
+{% extends 'common/app.twig' %}
+
+{% block content %}    
+    
+        <div class="col-md-12">
+            <h2>Plan Options</h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    All active plan options
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Option Type</th>
+                                    <th>Option Value</th>
+                                    <th>Status</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for option in data.data %}
+                                    <tr>
+                                        <td>{{ option.option_type }}</td>
+                                        <td>{{ option.option_value }}</td>
+                                        <td>{{ option.status }}</td>
+                                        
+                                    </tr>  
+                                    
+                                {% else %}
+                                    <tr>No plans exist yet</tr>
+                                {% endfor %}
+                            </tbody>  
+                        </table>
+
+
+                        <ul class="pagination">
+                            <li class="paginate_button previous" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+                                <a href="/options?page={{ data.first_page }}">First</a>
+                            </li>
+                            
+                            {% if data.current_page != 1 %}
+                                <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/options?page={{ data.current_page-1 }}">{{ data.current_page-1 }}</a>
+                                </li>  
+                            {% endif %}
+
+                            <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
+                                <a href="/options?page={{ data.current_page }}">{{ data.current_page }}</a>
+                            </li>
+
+                            {% if data.next_page_url is not empty %}
+                                <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/options?page={{ data.current_page+1 }}">{{ data.current_page+1 }}</a>
+                                </li>  
+                            {% endif %}
+
+
+                            <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
+                                <a href="/options?page={{ data.last_page }}">Last</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+{% endblock %}

@@ -1,0 +1,4 @@
+Price Type,Net Type,Validity,MB Start,MB End,Voice Start,Voice End,Price,Market Price
+APPM,Onnet,7,0,4,0,4,0.25,0.29
+APPM,Onnet,7,5,9,5,9,0.24,0.28
+APPMB,Onnet,7,0,4,0,4,1.25,1.35

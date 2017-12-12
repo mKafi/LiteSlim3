@@ -1,0 +1,32 @@
+{% extends 'common/app.twig' %}
+
+{% block content %}    
+    <div class="row"> 
+        
+        <div class="col-md-12">
+            <h2 class="page-header">Configurations</h2>
+            <form action="{{ path_for('config-post') }}" method="post">
+                {% for group in records %}
+                    {% for field_set in group %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">{{ field_set.field_title }}</label>
+                            {% if field_set.data_type == 'string' %}
+                                <input type="text" class="form-control" id="{{ field_set.field_name }}" name="{{ field_set.field_name }}" aria-describedby="emailHelp" value="{{ field_set.value }}">
+                            {% elseif field_set.data_type == 'options' and field_set.value_options is not empty %}                                
+                                <select class="form-control" name="{{ field_set.field_name }}">
+                                    {% for key, opt in field_set.value_options %}
+                                        <option value="{{ key }}" {% if key == field_set.value %} selected="selected" {% endif %} >{{ opt }}</options>
+                                    {% endfor %}
+                                </select>
+                            {% endif %}
+                            
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+
+                    {% endfor %}
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+  </div>
+{% endblock %}

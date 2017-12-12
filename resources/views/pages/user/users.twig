@@ -1,0 +1,80 @@
+{% extends 'common/app.twig' %}
+
+{% block content %}    
+        
+        <div class="col-md-12 col-sm-12 col-offset-3">
+            <h2>Users</h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="/user/create" class="btn btn-primary">Create User</a>
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Type</th>
+                                    <th>Nick name</th>
+                                    <th>Full name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Registered At</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in data['data'] %}
+                                    <tr>
+                                        <td>{{ user.id }}</td>
+                                        <td>{{ user.role }}</td>
+                                        <td>{{ user.nick }}</td>
+                                        <td>{{ user.name }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.phone }}</td>
+                                        <td>{{ user.created_at }}</td>
+                                        <td><a href="/user?id={{ user.id }}">Edit</a></td>
+                                    </tr>  
+                                    
+                                {% else %}
+                                    <tr>No user exist yet</tr>
+                                {% endfor %}
+                            </tbody>  
+                        </table> 
+
+                        {% if data.last_page > 1 %}
+                        <ul class="pagination">
+                            <li class="paginate_button previous" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+                                <a href="/users?page={{ user.first_page }}">First</a>
+                            </li>
+                            
+                            {% if user.current_page != 1 %}
+                                <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/users?page={{ user.current_page-1 }}">{{ user.current_page-1 }}</a>
+                                </li>  
+                            {% endif %}
+
+                            <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
+                                <a href="/users?page={{ user.current_page }}">{{ user.current_page }}</a>
+                            </li>
+
+                            {% if user.next_page_url is not empty %}
+                                <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/users?page={{ user.current_page+1 }}">{{ user.current_page+1 }}</a>
+                                </li>  
+                            {% endif %}
+
+
+                            <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
+                                <a href="/users?page={{ user.last_page }}">Last</a>
+                            </li>
+                        </ul>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>    
+        </div> 
+   
+{% endblock %}

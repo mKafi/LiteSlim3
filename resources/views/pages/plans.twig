@@ -1,0 +1,87 @@
+{% extends 'common/app.twig' %}
+
+{% block content %}    
+        
+        <div class="col-md-12 col-sm-12 col-offset-3">
+            <h2>Plans</h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    All variations for FlexiPlan offer
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Price Type</th>
+                                    <th>Net Type</th>
+                                    <th>Validity</th>
+                                    <th>Data Start</th>
+                                    <th>Data End</th>
+                                    <th>Voice Start</th>
+                                    <th>Voice End</th>
+                                    <th>Price</td>
+                                    <th>Market Price</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for plan in data['data'] %}
+                                    <tr>
+                                        <td>{{ plan.price_type }}</td>
+                                        <td>{{ plan.net_type }}</td>
+                                        <td>{{ plan.validity }}</td>
+                                        <td>{{ plan.mb_start }}</td>
+                                        <td>{{ plan.mb_end }}</td>
+                                        <td>{{ plan.voice_start }}</td>
+                                        <td>{{ plan.voice_end }}</td>
+                                        <td>{{ plan.price }}</td>
+                                        <td>{{ plan.market_price }}</td>
+                                        <td>{{ plan.status }}</td>
+                                        <td>{{ plan.created_at }}</td>
+                                        <td>{{ plan.updated_at }}</td>
+                                        
+                                    </tr>  
+                                    
+                                {% else %}
+                                    <tr>No plans exist yet</tr>
+                                {% endfor %}
+                            </tbody>  
+                        </table> 
+
+                        <ul class="pagination">
+                            <li class="paginate_button previous" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+                                <a href="/plans?page={{ data.first_page }}">First</a>
+                            </li>
+                            
+                            {% if data.current_page != 1 %}
+                                <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/plans?page={{ data.current_page-1 }}">{{ data.current_page-1 }}</a>
+                                </li>  
+                            {% endif %}
+
+                            <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
+                                <a href="/plans?page={{ data.current_page }}">{{ data.current_page }}</a>
+                            </li>
+
+                            {% if data.next_page_url is not empty %}
+                                <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                                    <a href="/plans?page={{ data.current_page+1 }}">{{ data.current_page+1 }}</a>
+                                </li>  
+                            {% endif %}
+
+
+                            <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
+                                <a href="/plans?page={{ data.last_page }}">Last</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>    
+        </div> 
+   
+{% endblock %}

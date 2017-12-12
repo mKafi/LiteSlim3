@@ -1,0 +1,21 @@
+{% extends 'common/app.twig' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-offset-3">
+      <h2 class="page-header">Import Plan Options</h2>        
+        <form action="{{ path_for('importOptionsPost') }}" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="import_plans_csv">Upload Plans</label>
+            <input type="file" class="form-control" id="import_plan_options" name="import_plan_options" aria-describedby="emailHelp" placeholder="Upload Plans">
+            <small id="fileHelp" class="form-text text-muted">Upload CSV/XLSx file to update plan options</small>
+          </div>
+
+          <div class="form-group">
+            <label for="import_plans_csv">&nbsp;</label>
+            <button type="submit" name="btn_submit" class="btn btn-primary">Submit</button>  
+          </div>
+        </form>  
+    </div>
+  </div>
+{% endblock %}

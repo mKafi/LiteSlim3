@@ -1,0 +1,78 @@
+{% extends 'common/app.twig' %}
+
+{% block content %}    
+    
+        <div class="col-md-12">
+            <h2>Purchas History</h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Latest purchases for this week
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>C.ID</th>
+                                <th>Phone</th>                                
+                                <th>IMEI</th>
+                                <th>Purchase Number</th>                                
+                                <th>Transaction ID</th>                                
+                                <th>Status</th>
+                                <th>Remarks</th>
+
+                                <th>Net Type</th>                                
+                                <th>Data</th>
+                                <th>Voice</th>
+                                <th>Validity</th>
+                                <th>SMS</th>
+
+                                <th>Price</th>
+                                <th>Discount</th>
+
+                                <th>Created Date</th>
+                                <th>Updated Date</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% 
+                            
+                            for purchase in data %}
+                                
+                                <tr class="">
+                                    <td class="right">{{ purchase.id }}</td>
+                                    <td>{{ purchase.msisdn }}</td>
+                                    
+                                    <td>{{ purchase.platform }} <br/> {{ purchase.imei }} </td>
+                                    <td>{{ purchase.purchase_number }}</td>
+                                    <td>{{ purchase.transaction_id }}</td>
+                                    <td>{{ purchase.status }}</td>
+                                    <td>{{ purchase.remarks }}</td>
+
+                                    <td>{{ purchase.net_type }}</td>
+                                    <td>{{ purchase.data }}</td>
+                                    <td>{{ purchase.voice }}</td>
+                                    <td>{{ purchase.validity }}</td>
+                                    <td>{{ purchase.sms }}</td>
+                                    
+                                    <td>{{ purchase.flexi_plan_price }}</td>
+                                    <td>{{ purchase.discount }}</td>
+                                    
+                                    <td>{{ purchase.created_at }}</td>
+                                    <td class="center">{{ purchase.updated_at }}</td>
+                                </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        
+        <script src="./js/jquery.dataTables.min.js"></script>
+        <script src="./js/dataTables.bootstrap.min.js"></script>
+        <script src="./js/dataTables.responsive.js"></script>
+
+{% endblock %}
